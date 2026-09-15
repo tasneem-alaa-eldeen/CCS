@@ -28,9 +28,9 @@ public:
     }
 
     void removeBook(const string& title) {
-        for (auto it = books.begin(); it != books.end(); ++it) {
-            if (it->title == title) {
-                books.erase(it);
+        for (int i = 0; i < books.size(); i++) {
+            if (books[i].title == title) {
+                books.erase(books.begin() + i);
                 cout << "Book \"" << title << "\" removed.\n";
                 return;
             }
@@ -39,12 +39,12 @@ public:
     }
 
     void borrowBook(const string& title) {
-        for (auto& b : books) {
-            if (b.title == title) {
-                if (b.isBorrowed) {
+        for (int i = 0; i < books.size(); i++) {
+            if (books[i].title == title) {
+                if (books[i].isBorrowed) {
                     cout << "Book \"" << title << "\" is already borrowed.\n";
                 } else {
-                    b.isBorrowed = true;
+                    books[i].isBorrowed = true;
                     cout << "\"" << title << "\" borrowed successfully.\n";
                 }
                 return;
@@ -54,12 +54,12 @@ public:
     }
 
     void returnBook(const string& title) {
-        for (auto& b : books) {
-            if (b.title == title) {
-                if (!b.isBorrowed) {
+        for (int i = 0; i < books.size(); i++) {
+            if (books[i].title == title) {
+                if (!books[i].isBorrowed) {
                     cout << "Book was not borrowed.\n";
                 } else {
-                    b.isBorrowed = false;
+                    books[i].isBorrowed = false;
                     cout << "\"" << title << "\" returned successfully.\n";
                 }
                 return;
@@ -70,10 +70,10 @@ public:
 
     void searchBook(const string& query) {
         bool found = false;
-        for (const auto& b : books) {
-            if (b.title.find(query) != string::npos || b.author.find(query) != string::npos) {
-                cout << "Title: " << b.title << " | Author: " << b.author 
-                     << " | Status: " << (b.isBorrowed ? "Borrowed" : "Available") << "\n";
+        for (int i = 0; i < books.size(); i++) {
+            if (books[i].title.find(query) != string::npos || books[i].author.find(query) != string::npos) {
+                cout << "Title: " << books[i].title << " | Author: " << books[i].author 
+                     << " | Status: " << (books[i].isBorrowed ? "Borrowed" : "Available") << "\n";
                 found = true;
             }
         }
@@ -85,9 +85,9 @@ public:
             cout << "No books in library.\n";
             return;
         }
-        for (const auto& b : books) {
-            cout << "Title: " << b.title << " | Author: " << b.author 
-                 << " | Status: " << (b.isBorrowed ? "Borrowed" : "Available") << "\n";
+        for (int i = 0; i < books.size(); i++) {
+            cout << "Title: " << books[i].title << " | Author: " << books[i].author 
+                 << " | Status: " << (books[i].isBorrowed ? "Borrowed" : "Available") << "\n";
         }
     }
 };
