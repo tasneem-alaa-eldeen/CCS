@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <algorithm>
 
 using namespace std;
 
@@ -25,13 +24,14 @@ public:
     }
 
     void deleteCourse(const string& course) {
-        auto it = find(courses.begin(), courses.end(), course);
-        if (it != courses.end()) {
-            courses.erase(it);
-            cout << "Course \"" << course << "\" removed from " << name << ".\n";
-        } else {
-            cout << "Course not found for student " << name << ".\n";
+        for (int i = 0; i < courses.size(); i++) {
+            if (courses[i] == course) {
+                courses.erase(courses.begin() + i); 
+                cout << "Course \"" << course << "\" removed from " << name << "\n";
+                return; 
+            }
         }
+        cout << "Course not found for student " << name << "\n";
     }
 
     void display() const {
@@ -76,9 +76,10 @@ int main() {
             cin.ignore();
             getline(cin, name);
             bool found = false;
-            for (auto it = students.begin(); it != students.end(); ++it) {
-                if (it->getName() == name) {
-                    students.erase(it);
+
+            for (int i = 0; i < students.size(); i++) {
+                if (students[i].getName() == name) {
+                    students.erase(students.begin() + i);
                     cout << "Student \"" << name << "\" deleted.\n";
                     found = true;
                     break;
