@@ -17,12 +17,12 @@ public:
     }
 
     void print() {
-        cout << this->title << "\n";
-        for (string v : options) {
-            cout << v << " ";
-        }
-        cout << "\n";
+    cout << this->title << "\n";
+    for (size_t i = 0; i < options.size(); i++) {
+        cout << options[i] << " ";
     }
+    cout << "\n";
+}
 
     bool isCorrect(int choise) {
         return correctIndex == choise;
