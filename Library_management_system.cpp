@@ -68,28 +68,43 @@ public:
         cout << "Book not found.\n";
     }
 
-    void searchBook(const string& query) {
-        bool found = false;
-        for (int i = 0; i < books.size(); i++) {
-            if (books[i].title.find(query) != string::npos || books[i].author.find(query) != string::npos) {
-                cout << "Title: " << books[i].title << " | Author: " << books[i].author 
-                     << " | Status: " << (books[i].isBorrowed ? "Borrowed" : "Available") << "\n";
-                found = true;
+    void searchBook(const string& title) {
+    bool found = false;
+    for (int i = 0; i < books.size(); i++) {
+        if (books[i].title == title || books[i].author == title) {
+            cout << "Title: " << books[i].title 
+                 << " | Author: " << books[i].author 
+                 << " | Status: ";
+            
+            if (books[i].isBorrowed) {
+                cout << "Borrowed\n";
+            } else {
+                cout << "Available\n";
             }
+            
+            found = true;
         }
-        if (!found) cout << "No matching books found.\n";
     }
+    if (!found) cout << "No matching books found.\n";
+}
 
     void displayAll() const {
-        if (books.empty()) {
-            cout << "No books in library.\n";
-            return;
-        }
-        for (int i = 0; i < books.size(); i++) {
-            cout << "Title: " << books[i].title << " | Author: " << books[i].author 
-                 << " | Status: " << (books[i].isBorrowed ? "Borrowed" : "Available") << "\n";
+    if (books.empty()) {
+        cout << "No books in library.\n";
+        return;
+    }
+    for (int i = 0; i < books.size(); i++) {
+        cout << "Title: " << books[i].title 
+             << " | Author: " << books[i].author 
+             << " | Status: ";
+        
+        if (books[i].isBorrowed) {
+            cout << "Borrowed\n";
+        } else {
+            cout << "Available\n";
         }
     }
+}
 };
 
 int main() {
@@ -135,11 +150,11 @@ int main() {
             getline(cin, title);
             lib.returnBook(title);
         } else if (choice == 5) {
-            string query;
+            string title;
             cout << "Enter title or author to search: ";
             cin.ignore();
-            getline(cin, query);
-            lib.searchBook(query);
+            getline(cin, title);
+            lib.searchBook(title);
         } else if (choice == 6) {
             lib.displayAll();
         } else if (choice == 7) {
