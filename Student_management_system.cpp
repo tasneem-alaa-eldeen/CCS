@@ -40,9 +40,12 @@ public:
         if (courses.empty()) {
             cout << "None";
         } else {
-            for (size_t i = 0; i < courses.size(); i++) {
-                cout << courses[i] << (i + 1 < courses.size() ? ", " : "");
-            }
+            for (int i = 0; i < courses.size(); i++) {
+    cout << courses[i];
+    if (i < courses.size() - 1) {
+        cout << ", ";
+    }
+}
         }
         cout << "\n";
     }
@@ -76,7 +79,6 @@ int main() {
             cin.ignore();
             getline(cin, name);
             bool found = false;
-
             for (int i = 0; i < students.size(); i++) {
                 if (students[i].getName() == name) {
                     students.erase(students.begin() + i);
@@ -92,11 +94,11 @@ int main() {
             cin.ignore();
             getline(cin, name);
             bool found = false;
-            for (auto& s : students) {
-                if (s.getName() == name) {
+            for (int i = 0; i < students.size(); i++) {
+                if (students[i].getName() == name) {
                     cout << "Enter course name: ";
                     getline(cin, course);
-                    s.addCourse(course);
+                    students[i].addCourse(course);
                     found = true;
                     break;
                 }
@@ -108,11 +110,11 @@ int main() {
             cin.ignore();
             getline(cin, name);
             bool found = false;
-            for (auto& s : students) {
-                if (s.getName() == name) {
+            for (int i = 0; i < students.size(); i++) {
+                if (students[i].getName() == name) {
                     cout << "Enter course name to delete: ";
                     getline(cin, course);
-                    s.deleteCourse(course);
+                    students[i].deleteCourse(course);
                     found = true;
                     break;
                 }
@@ -122,8 +124,8 @@ int main() {
             if (students.empty()) {
                 cout << "No students found.\n";
             } else {
-                for (const auto& s : students) {
-                    s.display();
+                for (int i = 0; i < students.size(); i++) {
+                    students[i].display();
                 }
             }
         } else if (choice == 6) {
@@ -132,6 +134,5 @@ int main() {
             cout << "Invalid choice!\n";
         }
     }
-
     return 0;
 }
