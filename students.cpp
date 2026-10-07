@@ -11,7 +11,7 @@ int id;
 double grade;
 
 void print(){
-    cout<<id<<" "<<name<<" "<<grade<<endl;
+    cout<<id<<" | "<<name<<" | "<<grade<<endl;
 }
 
 };
@@ -31,7 +31,7 @@ double totalgrade(const vector<Students>& students, int n){
         cout<<"1. Add Student"<<endl;
         cout<<"2. Display Students"<<endl;
         cout<<"3. Linear Search by Name"<<endl;
-        cout<<"4. Linear Search by ID"<<endl;
+        cout<<"4. Binary Search by ID"<<endl;
         cout<<"5. Statistics (Highest, Lowest & Average)"<<endl;
         cout<<"6. Exit"<<endl;
         cout<<"Enter your choice: "<<endl;
@@ -43,7 +43,8 @@ double totalgrade(const vector<Students>& students, int n){
                 cout<<"Enter ID: "<<endl;
                 cin>>s.id;
                 cout<<"Enter Name: "<<endl;
-                cin>>s.name;
+                cin.ignore();
+                getline(cin, s.name);
                 cout<<"Enter Grade: "<<endl;
                 cin>>s.grade;
                 students.push_back(s);
